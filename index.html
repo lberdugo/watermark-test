@@ -6,17 +6,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   </head>
   <body>
-    <button onclick="saveWatermark()">Save Watermark</button>
+    <button id="saveBtn">Save Watermark</button>
     <a href="page2.html"> <button>Go to next page</button></a>
 
     <script>
-      let myCanvas; // <-- add this
+      let myCanvas;
 
       function setup() {
-        myCanvas = createCanvas(windowWidth, windowHeight); // <-- save the canvas to a variable
+        myCanvas = createCanvas(windowWidth, windowHeight);
         background(255);
         textSize(32);
         textAlign(CENTER, CENTER);
+
+        // Move button action inside setup, after canvas exists
+        const saveBtn = document.getElementById("saveBtn");
+        saveBtn.addEventListener("click", () => {
+          let dataURL = myCanvas.elt.toDataURL();
+          localStorage.setItem("userWatermark", dataURL);
+          alert("Watermark saved!");
+        });
       }
 
       function draw() {
@@ -24,12 +32,6 @@
           fill(0);
           text("★", mouseX, mouseY);
         }
-      }
-
-      function saveWatermark() {
-        let dataURL = myCanvas.elt.toDataURL(); // get the canvas as an image
-        localStorage.setItem("userWatermark", dataURL); // store it
-        alert("Watermark saved!");
       }
     </script>
   </body>
