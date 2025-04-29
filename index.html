@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Watermark Designer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+  <body>
+    <button onclick="saveWatermark()">Save Watermark</button>
+    <a href="page2.html"> <button>Go to next page</button></a>
+
+    <script>
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(255);
+        textSize(32);
+        textAlign(CENTER, CENTER);
+      }
+
+      function draw() {
+        if (mouseIsPressed) {
+          fill(0);
+          text("★", mouseX, mouseY);
+        }
+      }
+
+      function saveWatermark() {
+        let dataURL = canvas.toDataURL(); // get the canvas as an image
+        localStorage.setItem("userWatermark", dataURL); // store it
+        alert("Watermark saved!");
+      }
+    </script>
+  </body>
+</html>
