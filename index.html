@@ -10,27 +10,39 @@
     <a href="page2.html"><button>Go to next page</button></a>
 
     <script>
-      let myCanvas; // Define a global variable
+      let myCanvas;
 
       function setup() {
-        myCanvas = createCanvas(300, 150); // small canvas!
+        myCanvas = createCanvas(300, 150);
         background(255);
         textSize(32);
         textAlign(CENTER, CENTER);
 
         const saveBtn = document.getElementById("saveBtn");
         saveBtn.addEventListener("click", () => {
-          let dataURL = myCanvas.elt.toDataURL(); // THIS is the true canvas element
-          localStorage.setItem("userWatermark", dataURL);
+          savePartOfCanvas(100, 25, 100, 100); // Only save part of canvas -- this is x, y, w, h
           alert("Watermark saved!");
         });
       }
 
       function draw() {
         if (mouseIsPressed) {
-          fill("blue");
+          fill("purple");
           text("★", mouseX, mouseY);
         }
+      }
+
+      function savePartOfCanvas(x, y, w, h) {
+        let tempCanvas = document.createElement("canvas");
+        tempCanvas.width = w;
+        tempCanvas.height = h;
+
+        let tempCtx = tempCanvas.getContext("2d");
+
+        tempCtx.drawImage(myCanvas.elt, x, y, w, h, 0, 0, w, h);
+
+        let dataURL = tempCanvas.toDataURL();
+        localStorage.setItem("userWatermark", dataURL);
       }
     </script>
   </body>
