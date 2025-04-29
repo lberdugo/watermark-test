@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Page with Watermark</title>
-</head>
-<body>
-  <div id="watermark"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Page with Watermark</title>
+  </head>
+  <body>
+    <div id="watermark"></div>
 
-  <script>
-    let dataURL = localStorage.getItem('userWatermark');
-    if (dataURL) {
-      let img = document.createElement('img');
-      img.src = dataURL;
-      img.style.position = 'fixed';
-      img.style.bottom = '20px';
-      img.style.right = '20px';
-      img.style.opacity = '0.3'; // make it semi-transparent like a watermark
-      img.style.pointerEvents = 'none'; // so it doesn't block clicks
-      document.getElementById('watermark').appendChild(img);
-    }
-  </script>
-</body>
+    <script>
+      let dataURL = localStorage.getItem("userWatermark");
+      if (dataURL) {
+        let img = document.createElement("img");
+        img.src = dataURL;
+        img.style.position = "fixed";
+        img.style.bottom = "20px";
+        img.style.right = "20px";
+        img.style.opacity = "0.3";
+        img.style.pointerEvents = "none";
+        img.style.maxWidth = "150px"; // Keep it small
+        document.getElementById("watermark").appendChild(img);
+      } else {
+        console.log("No watermark found in localStorage!");
+      }
+    </script>
+  </body>
 </html>

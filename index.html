@@ -7,21 +7,20 @@
   </head>
   <body>
     <button id="saveBtn">Save Watermark</button>
-    <a href="page2.html"> <button>Go to next page</button></a>
+    <a href="page2.html"><button>Go to next page</button></a>
 
     <script>
-      let myCanvas;
+      let myCanvas; // Define a global variable
 
       function setup() {
-        myCanvas = createCanvas(windowWidth, windowHeight);
+        myCanvas = createCanvas(300, 150); // small canvas!
         background(255);
         textSize(32);
         textAlign(CENTER, CENTER);
 
-        // Move button action inside setup, after canvas exists
         const saveBtn = document.getElementById("saveBtn");
         saveBtn.addEventListener("click", () => {
-          let dataURL = myCanvas.elt.toDataURL();
+          let dataURL = myCanvas.elt.toDataURL(); // THIS is the true canvas element
           localStorage.setItem("userWatermark", dataURL);
           alert("Watermark saved!");
         });
@@ -29,7 +28,7 @@
 
       function draw() {
         if (mouseIsPressed) {
-          fill("red");
+          fill(0);
           text("★", mouseX, mouseY);
         }
       }
