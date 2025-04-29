@@ -10,8 +10,10 @@
     <a href="page2.html"> <button>Go to next page</button></a>
 
     <script>
+      let myCanvas; // <-- add this
+
       function setup() {
-        createCanvas(windowWidth, windowHeight);
+        myCanvas = createCanvas(windowWidth, windowHeight); // <-- save the canvas to a variable
         background(255);
         textSize(32);
         textAlign(CENTER, CENTER);
@@ -25,7 +27,7 @@
       }
 
       function saveWatermark() {
-        let dataURL = canvas.toDataURL(); // get the canvas as an image
+        let dataURL = myCanvas.elt.toDataURL(); // get the canvas as an image
         localStorage.setItem("userWatermark", dataURL); // store it
         alert("Watermark saved!");
       }
